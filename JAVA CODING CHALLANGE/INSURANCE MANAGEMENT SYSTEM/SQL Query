@@ -1,3 +1,0 @@
-create database harini;
-use database harini;
-drop database harini;
