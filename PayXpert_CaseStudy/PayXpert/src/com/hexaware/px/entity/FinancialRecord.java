@@ -1,7 +1,4 @@
 
-/*@author: Mithra
- * Date: 12/04/2025
- * Description: Creating FinancialRecord class.*/
 package com.hexaware.px.entity;
 
 import java.util.Date;
