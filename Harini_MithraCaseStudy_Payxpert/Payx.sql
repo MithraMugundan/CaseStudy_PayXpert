@@ -53,7 +53,18 @@ INSERT INTO employee VALUES
 (7, 'Sara', 'Taylor', '1991-02-28', 'Female', 'sara.t@example.com', '3210987654', 'Boston', 'QA', '2020-11-11', NULL),
 (8, 'Tom', 'Anderson', '1989-12-12', 'Male', 'tom.a@example.com', '2109876543', 'Denver', 'DevOps', '2014-05-09', NULL),
 (9, 'Lily', 'Martinez', '1994-06-18', 'Female', 'lily.m@example.com', '1098765432', 'Austin', 'Support', '2021-01-01', NULL),
-(10, 'Chris', 'Lee', '1990-10-05', 'Male', 'chris.lee@example.com', '9988776655', 'San Francisco', 'Lead', '2012-03-25', NULL);
+(10, 'Chris', 'Lee', '1990-10-05', 'Male', 'chris.lee@example.com', '9988776655', 'San Francisco', 'Lead', '2012-03-25', NULL),
+(11, 'Julia', 'Lopez', '1996-08-06', 'Female', 'julia.lopez@example.com', '2211009988', 'San Jose', 'HR', '2022-02-11', NULL),
+(12, 'Kevin', 'Hill', '1989-04-29', 'Male', 'kevin.hill@example.com', '1100998877', 'Austin', 'Tester', '2015-10-20', NULL),
+(13, 'Laura', 'Scott', '1990-09-13', 'Female', 'laura.scott@example.com', '9988776654', 'Jacksonville', 'Support', '2018-03-05', NULL),
+(14, 'Michael', 'Green', '1985-12-22', 'Male', 'michael.green@example.com', '8877665543', 'Fort Worth', 'Developer', '2014-11-11', NULL),
+(15, 'Natalie', 'Adams', '1991-07-30', 'Female', 'natalie.adams@example.com', '7766554432', 'Columbus', 'Analyst', '2019-06-06', NULL),
+(16, 'Oscar', 'Baker', '1992-01-17', 'Male', 'oscar.baker@example.com', '6655443321', 'Charlotte', 'Designer', '2021-01-19', NULL),
+(17, 'Paula', 'Carter', '1988-11-05', 'Female', 'paula.carter@example.com', '5544332210', 'San Francisco', 'HR', '2013-12-25', NULL),
+(18, 'Quinn', 'Diaz', '1993-03-23', 'Other', 'quinn.diaz@example.com', '4433221109', 'Indianapolis', 'Developer', '2020-08-14', NULL),
+(19, 'Rachel', 'Evans', '1987-06-09', 'Female', 'rachel.evans@example.com', '3322110098', 'Seattle', 'Support', '2017-04-30', NULL),
+(20, 'Steven', 'Flores', '1995-05-27', 'Male', 'steven.flores@example.com', '2211009987', 'Denver', 'Analyst', '2022-09-01', NULL),
+(21, 'Tina', 'Garcia', '1994-02-12', 'Female', 'tina.garcia@example.com', '1100998876', 'Washington', 'Manager', '2016-01-05', NULL);
 INSERT INTO financial_records VALUES
 (101, 1, '2024-01-01', 'Travel Reimbursement', 150.00, 'Credit'),
 (102, 2, '2024-01-05', 'Client Meeting Expense', 200.00, 'Debit'),
@@ -87,6 +98,11 @@ INSERT INTO taxes VALUES
 (308, 8, 2023, 70800.00, 10620.00),
 (309, 9, 2023, 61200.00, 9180.00),
 (310, 10, 2023, 80400.00, 12060.00);
+
+select * from employee;
+select * from payroll;
+select * from financial_records;
+
 
 
 
