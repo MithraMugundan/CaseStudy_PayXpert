@@ -13,6 +13,11 @@ public class PayrollDaoImpl implements IPayrollDao {
 
     @Override
     public Payroll addPayroll(Payroll payroll) {
+        // Validate that start and end dates are not null
+        if (payroll.getPayPeriodStartDate() == null || payroll.getPayPeriodEndDate() == null) {
+            throw new IllegalArgumentException("Pay period start and end dates cannot be null.");
+        }
+
         String query = "INSERT INTO payroll (employeeID, payPeriodStartDate, payPeriodEndDate, basicSalary, overtimePay, deductions, netSalary) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBUtil.getDBConnection();
              PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -126,6 +131,11 @@ public class PayrollDaoImpl implements IPayrollDao {
 
     @Override
     public void updatePayroll(Payroll payroll) {
+        // Validate that start and end dates are not null
+        if (payroll.getPayPeriodStartDate() == null || payroll.getPayPeriodEndDate() == null) {
+            throw new IllegalArgumentException("Pay period start and end dates cannot be null.");
+        }
+
         String query = "UPDATE payroll SET payPeriodStartDate = ?, payPeriodEndDate = ?, basicSalary = ?, overtimePay = ?, deductions = ?, netSalary = ? WHERE payrollID = ?";
         try (Connection conn = DBUtil.getDBConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
