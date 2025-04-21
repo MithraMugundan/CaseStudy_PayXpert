@@ -1,3 +1,4 @@
+
  package com.hexaware.px.presentation;
  import com.hexaware.px.dao.TaxDaoImpl;
 import com.hexaware.px.dao.EmployeeDaoImpl;
@@ -236,66 +237,84 @@ public class Main {
                     scanner.nextLine();
                     
                     switch (payrollChoice) {
-                        case 1:
-                            System.out.println("Enter payroll details:");
-                            System.out.print("Payroll ID: ");
-                            int payrollId = scanner.nextInt();
+                       
 
-                            System.out.print("Employee ID: ");
-                            int employeePayrollId = scanner.nextInt();
+                    case 1:
+                        System.out.println("Enter payroll details:");
+                        System.out.print("Payroll ID: ");
+                        int payrollId = scanner.nextInt();
 
-                            System.out.print("Base Salary: ");
-                            double baseSalary = scanner.nextDouble();
+                        System.out.print("Employee ID: ");
+                        int employeePayrollId = scanner.nextInt();
 
-                            System.out.print("Bonus: ");
-                            double bonus = scanner.nextDouble();
+                        System.out.print("Base Salary: ");
+                        double baseSalary = scanner.nextDouble();
 
-                            System.out.print("Deductions: ");
-                            double deductions = scanner.nextDouble();
-                            scanner.nextLine();
+                        System.out.print("Overtime Pay: ");
+                        double overtimePay = scanner.nextDouble();
 
-                            System.out.print("Payroll Date (yyyy-mm-dd): ");
-                            String payrollDateStr = scanner.nextLine();
-                            LocalDate payrollDate = LocalDate.parse(payrollDateStr);
+                        System.out.print("Deductions: ");
+                        double deductions = scanner.nextDouble();
+                        scanner.nextLine();
 
-                            Payroll payroll = new Payroll();
-                            payrollService.addPayroll(payroll);
-                            System.out.println("Payroll added successfully.");
-                            break;
+                        System.out.print("Net Salary: ");
+                        double netSalary = scanner.nextDouble();
+                        scanner.nextLine();
 
-                        case 2:
-                            System.out.print("Enter Payroll ID: ");
-                            int searchPayrollId = scanner.nextInt();
-                            Payroll foundPayroll = null;
-                            try {
-                                foundPayroll = payrollService.getPayrollById(searchPayrollId);
-                            } catch (PayrollNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                            if (foundPayroll != null) {
-                                System.out.println("Payroll Details: " + foundPayroll);
-                            } else {
-                                System.out.println("Payroll not found.");
-                            }
-                            break;
+                        System.out.print("Payroll Date (yyyy-mm-dd): ");
+                        String payrollDateStr = scanner.nextLine();
+                        LocalDate payrollDate = LocalDate.parse(payrollDateStr);
 
-                        case 3:
-                            System.out.print("Enter Payroll ID to delete: ");
-                            int deletePayrollId = scanner.nextInt();
-                            try {
-                                payrollService.deletePayroll(deletePayrollId);
-                            } catch (PayrollNotFoundException e) {
-                                e.printStackTrace();
-                            }
+                        // Assuming the payroll period is 1 month for simplicity
+                        LocalDate payPeriodStartDate = payrollDate.withDayOfMonth(1); // First day of the month
+                        LocalDate payPeriodEndDate = payPeriodStartDate.withDayOfMonth(payPeriodStartDate.lengthOfMonth()); // Last day of the month
+
+                        // Create Payroll object with all necessary data
+                        Payroll payroll = new Payroll();
+                        payroll.setPayrollID(payrollId);
+                        payroll.setEmployeeID(employeePayrollId);
+                        payroll.setBasicSalary(baseSalary);
+                        payroll.setOvertimePay(overtimePay);
+                        payroll.setDeductions(deductions);
+                        payroll.setNetSalary(netSalary);
+                        payroll.setPayPeriodStartDate(payPeriodStartDate);
+                        payroll.setPayPeriodEndDate(payPeriodEndDate);
+
+                        payrollService.addPayroll(payroll);
+                        System.out.println("Payroll added successfully.");
+                        break;
+
+                    case 2:
+                        System.out.print("Enter Payroll ID: ");
+                        int searchPayrollId = scanner.nextInt();
+                        Payroll foundPayroll = null;
+                        try {
+                            foundPayroll = payrollService.getPayrollById(searchPayrollId);
+                        } catch (PayrollNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        if (foundPayroll != null) {
+                            System.out.println("Payroll Details: " + foundPayroll);
+                        } else {
+                            System.out.println("Payroll not found.");
+                        }
+                        break;
+
+                    case 3:
+                        System.out.print("Enter Payroll ID to delete: ");
+                        int deletePayrollId = scanner.nextInt();
+                        try {
+                            payrollService.deletePayroll(deletePayrollId);
                             System.out.println("Payroll deleted successfully.");
-                            break;
-
-                        default:
-                            System.out.println("Invalid choice. Please try again.");
-                            break;
-                    }
-                    break;
-
+                        } catch (PayrollNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        break;
+                }
+                break;
                 case 4:
                     System.out.println("----- Financial Record Management -----");
                     System.out.println("1. Add Financial Record");
@@ -305,17 +324,33 @@ public class Main {
                     System.out.print("Enter your choice: ");
                     int financialRecordChoice = scanner.nextInt();
                     scanner.nextLine();
-                    
+
                     switch (financialRecordChoice) {
                         case 1:
                             System.out.println("Enter financial record details:");
+                            System.out.print("Record ID: ");
+                            int recordId = scanner.nextInt();
+
+                            System.out.print("Employee ID: ");
+                            int employeeId = scanner.nextInt();
+                            scanner.nextLine();
+
+                            System.out.print("Record Date (yyyy-mm-dd): ");
+                            String recordDateStr = scanner.nextLine();
+                            LocalDate recordDate = LocalDate.parse(recordDateStr);
+
+                            System.out.print("Description: ");
+                            String description = scanner.nextLine();
+
                             System.out.print("Amount: ");
                             double amount = scanner.nextDouble();
                             scanner.nextLine();
 
-                            FinancialRecord financialRecord = new FinancialRecord();
-                            financialRecord.setAmount(amount);
-                            financialRecordService.addFinancialRecord(financialRecord);
+                            System.out.print("Record Type: ");
+                            String recordType = scanner.nextLine();
+
+                            FinancialRecord newRecord = new FinancialRecord(recordId, employeeId, recordDate, description, amount, recordType);
+                            financialRecordService.addFinancialRecord(newRecord);
                             System.out.println("Financial Record added successfully.");
                             break;
 
@@ -337,9 +372,31 @@ public class Main {
 
                             FinancialRecord recordToUpdate = financialRecordService.getFinancialRecordById(updateRecordId);
                             if (recordToUpdate != null) {
-                                System.out.print("New Amount: ");
-                                double newAmount = scanner.nextDouble();
-                                recordToUpdate.setAmount(newAmount);
+                                System.out.println("Enter new values (leave blank to keep current):");
+
+                                System.out.print("New Description (" + recordToUpdate.getDescription() + "): ");
+                                String newDesc = scanner.nextLine();
+                                if (!newDesc.isEmpty()) {
+                                    recordToUpdate.setDescription(newDesc);
+                                }
+
+                                System.out.print("New Amount (" + recordToUpdate.getAmount() + "): ");
+                                String newAmountStr = scanner.nextLine();
+                                if (!newAmountStr.isEmpty()) {
+                                    recordToUpdate.setAmount(Double.parseDouble(newAmountStr));
+                                }
+
+                                System.out.print("New Record Type (" + recordToUpdate.getRecordType() + "): ");
+                                String newType = scanner.nextLine();
+                                if (!newType.isEmpty()) {
+                                    recordToUpdate.setRecordType(newType);
+                                }
+
+                                System.out.print("New Record Date (" + recordToUpdate.getRecordDate() + "): ");
+                                String newDate = scanner.nextLine();
+                                if (!newDate.isEmpty()) {
+                                    recordToUpdate.setRecordDate(LocalDate.parse(newDate));
+                                }
 
                                 financialRecordService.updateFinancialRecord(recordToUpdate);
                                 System.out.println("Financial Record updated successfully.");
@@ -360,6 +417,7 @@ public class Main {
                             break;
                     }
                     break;
+
 
                 case 5:
                     System.out.println("Exiting...");
