@@ -35,7 +35,7 @@ public class FinancialRecordDaoImpl implements IFinancialRecordDao {
     @Override
     public List<FinancialRecord> getFinancialRecordsForEmployee(int employeeId) {
         List<FinancialRecord> financialRecords = new ArrayList<>();
-        String query = "SELECT * FROM financial_records WHERE employee_id = ?";
+        String query = "SELECT * FROM financial_records WHERE employeeId = ?";
         try (Connection connection = DBUtil.getDBConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, employeeId);
@@ -84,7 +84,7 @@ public class FinancialRecordDaoImpl implements IFinancialRecordDao {
 
     @Override
     public FinancialRecord addFinancialRecord(FinancialRecord financialRecord) {
-        String query = "INSERT INTO financial_records (employee_id, record_date, description, amount, record_type) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO financial_records (employeeId, record_date, description, amount, record_type) VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = DBUtil.getDBConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, financialRecord.getEmployeeID());
@@ -114,7 +114,7 @@ public class FinancialRecordDaoImpl implements IFinancialRecordDao {
 
     @Override
     public void updateFinancialRecord(FinancialRecord financialRecord) {
-        String query = "UPDATE financial_records SET employee_id = ?, record_date = ?, description = ?, amount = ?, record_type = ? WHERE record_id = ?";
+        String query = "UPDATE financial_records SET employeeId = ?, record_date = ?, description = ?, amount = ?, record_type = ? WHERE record_id = ?";
         try (Connection connection = DBUtil.getDBConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, financialRecord.getEmployeeID());
